@@ -3,3 +3,6 @@ node_modules/
 .cursor/
 *.log
 .DS_Store
+
+# Canonical CCo names, comments, and maps (keep local; not for junior/public clones)
+.cco-canonical.md

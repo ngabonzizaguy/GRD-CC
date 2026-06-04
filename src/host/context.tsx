@@ -1,35 +1,35 @@
 'use client';
 
 import { createContext, useContext, useEffect, type ReactNode } from 'react';
-import { registerCcoHost } from '@cco/host/registry';
-import type { CcoHostAdapter } from '@cco/host/types';
-import type { CcoUser } from '@cco/types/admin';
+import { bindLmxBridge } from '@cco/host/registry';
+import type { LmxBridge } from '@cco/host/types';
+import type { LmxActor } from '@cco/types/admin';
 
-const CcoUserContext = createContext<CcoUser | null>(null);
+const LmxActorContext = createContext<LmxActor | null>(null);
 
-export function CcoHostProvider({
+export function LmxBindProvider({
   host,
   user,
   children,
 }: {
-  host: CcoHostAdapter;
-  user?: CcoUser | null;
+  host: LmxBridge;
+  user?: LmxActor | null;
   children: ReactNode;
 }) {
   useEffect(() => {
-    registerCcoHost(host);
+    bindLmxBridge(host);
   }, [host]);
 
   const resolvedUser = user !== undefined ? user : host.getUser();
 
-  return <CcoUserContext.Provider value={resolvedUser}>{children}</CcoUserContext.Provider>;
+  return <LmxActorContext.Provider value={resolvedUser}>{children}</LmxActorContext.Provider>;
 }
 
-export function useCcoUser(): CcoUser | null {
-  return useContext(CcoUserContext);
+export function useLmxActor(): LmxActor | null {
+  return useContext(LmxActorContext);
 }
 
 export function useIsSuperAdmin(): boolean {
-  const user = useCcoUser();
+  const user = useLmxActor();
   return (user?.role as string) === 'super_admin';
 }

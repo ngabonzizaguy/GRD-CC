@@ -4,13 +4,13 @@
   "private": true,
   "description": "Private shared UI package for admin dashboard layout work",
   "sideEffects": [
-    "./src/theme/cco-theme.css"
+    "./src/theme/lmx-theme.css"
   ],
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./theme.css": "./src/theme/cco-theme.css"
+    "./theme.css": "./src/theme/lmx-theme.css"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

@@ -1,8 +1,6 @@
-/**
- * Dashboard feature toggles for CCo (localStorage; super_admin via overlay).
- */
 
-const PREFIX = 'gr_main_admin_';
+
+const PREFIX = 'gr_lmx_m_';
 
 export const SHOW_SETTINGS_ADMIN_TAB_KEY = `${PREFIX}show_settings_admin_tab`;
 export const REQUIRE_ADMIN_SELF_CREDENTIALS_KEY = `${PREFIX}require_admin_self_credentials`;

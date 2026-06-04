@@ -1,9 +1,6 @@
-/**
- * Shared admin navigation config for main sidebar and CCo sidebar CRUD.
- * Icon names match lucide-react export names (resolved in UI layers).
- */
 
-export const ADMIN_NAV_STORAGE_KEY = 'gr_cco_nav';
+
+export const LMX_NAV_K = 'gr_lmx_n';
 
 export type NavItemConfig = {
   id: string;
@@ -18,17 +15,17 @@ export type NavItemConfig = {
 };
 
 export type AdminNavStorageOverride = {
-  /** Per-item overrides keyed by nav item id */
+  
   items?: Record<
     string,
     Partial<Pick<NavItemConfig, 'label' | 'href' | 'visible' | 'order'>>
   >;
-  /** Global display order of item ids (optional) */
+  
   order?: string[];
 };
 
 const DEFAULT_ADMIN_NAV_CONFIG: NavItemConfig[] = [
-  { id: 'dashboard', label: 'Dashboard', href: '/', icon: 'LayoutDashboard', sectionId: 'main', sectionLabel: 'Main' },
+  { id: 'p2', label: 'Dashboard', href: '/', icon: 'LayoutDashboard', sectionId: 'main', sectionLabel: 'Main' },
   { id: 'feedback', label: 'Feedback', href: '/feedback', icon: 'MessageSquare', sectionId: 'main', sectionLabel: 'Main' },
   { id: 'live-map', label: 'Live Map', href: '/map', icon: 'Map', sectionId: 'main', sectionLabel: 'Main' },
   { id: 'drivers', label: 'Drivers', href: '/drivers', icon: 'Car', sectionId: 'operations', sectionLabel: 'Operations' },
@@ -73,7 +70,7 @@ function cloneDefaultNav(): NavItemConfig[] {
 
 function readStorageOverride(): AdminNavStorageOverride | null {
   if (typeof window === 'undefined') return null;
-  const raw = localStorage.getItem(ADMIN_NAV_STORAGE_KEY);
+  const raw = localStorage.getItem(LMX_NAV_K);
   if (!raw) return null;
   try {
     return JSON.parse(raw) as AdminNavStorageOverride;
@@ -107,7 +104,7 @@ function applyOverrides(items: NavItemConfig[], override: AdminNavStorageOverrid
   return merged.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
 
-/** Default nav structure merged with CCo localStorage overrides (`gr_cco_nav`). */
+
 export function getAdminNavConfig(): NavItemConfig[] {
   const base = cloneDefaultNav();
   return applyOverrides(base, readStorageOverride());
@@ -115,8 +112,8 @@ export function getAdminNavConfig(): NavItemConfig[] {
 
 export function saveAdminNavConfigToStorage(override: AdminNavStorageOverride): void {
   if (typeof window === 'undefined') return;
-  localStorage.setItem(ADMIN_NAV_STORAGE_KEY, JSON.stringify(override));
-  window.dispatchEvent(new CustomEvent('host-nav-updated'));
+  localStorage.setItem(LMX_NAV_K, JSON.stringify(override));
+  window.dispatchEvent(new CustomEvent('lmx-nav-ping'));
 }
 
 export function getDefaultAdminNavConfig(): NavItemConfig[] {

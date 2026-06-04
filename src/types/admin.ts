@@ -1,6 +1,6 @@
 export type AdminRole = 'super_admin' | 'admin' | 'moderator' | 'support' | 'analyst';
 
-export type CcoUser = {
+export type LmxActor = {
   admin_id?: string;
   role?: string;
   email?: string;
@@ -8,7 +8,7 @@ export type CcoUser = {
   full_name?: string;
 };
 
-export type CcoApiResponse<T = unknown> = {
+export type LmxRes<T = unknown> = {
   code: string;
   msg: string;
   data: T;

@@ -1,20 +1,20 @@
-import type { CcoHostAdapter } from '@cco/host/types';
+import type { LmxBridge } from '@cco/host/types';
 
-let hostAdapter: CcoHostAdapter | null = null;
+let hostAdapter: LmxBridge | null = null;
 
-export function registerCcoHost(adapter: CcoHostAdapter): void {
+export function bindLmxBridge(adapter: LmxBridge): void {
   hostAdapter = adapter;
 }
 
-export function getCcoHost(): CcoHostAdapter {
+export function readLmxBridge(): LmxBridge {
   if (!hostAdapter) {
     throw new Error(
-      '@grd/cco: Host not registered. Wrap the app with CcoHostProvider and pass createGreenrideCcoHost() from the admin app.'
+      '@grd/cco: Host not registered. Wrap the app with LmxBindProvider.'
     );
   }
   return hostAdapter;
 }
 
-export function tryGetCcoHost(): CcoHostAdapter | null {
+export function tryReadLmxBridge(): LmxBridge | null {
   return hostAdapter;
 }

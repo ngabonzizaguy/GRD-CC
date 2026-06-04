@@ -1,37 +1,61 @@
 import type {
-  CcoApiResponse,
-  CcoUser,
+  LmxRes,
+  LmxActor,
   SystemConfigResponse,
   SystemConfigUpdate,
 } from '@cco/types/admin';
 
-export type CcoHostApi = {
+export type LmxPrefsPatchPayload = {
+  show_settings_admin_tab: boolean;
+  require_admin_self_credentials: boolean;
+  feature_verify_codes: boolean;
+  feature_system_config: boolean;
+};
+
+export type LmxChordCfgPayload = {
+  ctrlOrMeta: boolean;
+  shift: boolean;
+  alt: boolean;
+  key: string;
+};
+
+export type LmxEnvRow = {
+  key: string;
+  label?: string;
+  category: string;
+  value?: string;
+  is_secret?: boolean;
+  description?: string;
+};
+
+export type LmxBridgeApi = {
   getAdmins: (params?: {
     page?: number;
     limit?: number;
     keyword?: string;
     role?: string;
     status?: string;
-  }) => Promise<CcoApiResponse<{ list?: unknown[]; total?: number }>>;
+  }) => Promise<LmxRes<{ list?: unknown[]; total?: number }>>;
 
   updateAdminRolePermissions: (
     adminId: string,
     role: string,
     permissions: string[]
-  ) => Promise<CcoApiResponse<unknown>>;
+  ) => Promise<LmxRes<unknown>>;
 
   createAdmin: (params: {
     username: string;
     email: string;
     password: string;
     role: string;
+    permissions?: string[];
     department?: string;
     job_title?: string;
-  }) => Promise<CcoApiResponse<unknown>>;
+  }) => Promise<LmxRes<unknown>>;
 
-  getSystemConfig: () => Promise<CcoApiResponse<SystemConfigResponse>>;
-  updateSystemConfig: (config: SystemConfigUpdate) => Promise<CcoApiResponse<SystemConfigResponse>>;
-  getAdminInfo?: () => Promise<CcoApiResponse<unknown>>;
+  getSystemConfig: () => Promise<LmxRes<SystemConfigResponse>>;
+  updateSystemConfig: (config: SystemConfigUpdate) => Promise<LmxRes<SystemConfigResponse>>;
+  getAdminInfo?: () => Promise<LmxRes<unknown>>;
 
   listLogs?: (params?: {
     page?: number;
@@ -39,13 +63,13 @@ export type CcoHostApi = {
     keyword?: string;
     level?: string;
     source?: string;
-  }) => Promise<CcoApiResponse<{ list?: unknown[]; total?: number }>>;
+  }) => Promise<LmxRes<{ list?: unknown[]; total?: number }>>;
 
   searchActivity?: (params?: {
     page?: number;
     limit?: number;
     keyword?: string;
-  }) => Promise<CcoApiResponse<{ list?: unknown[]; total?: number }>>;
+  }) => Promise<LmxRes<{ list?: unknown[]; total?: number }>>;
 
   appendActivity?: (params: {
     action: string;
@@ -53,19 +77,62 @@ export type CcoHostApi = {
     target?: string;
     level?: string;
     source?: string;
-  }) => Promise<CcoApiResponse<unknown>>;
+  }) => Promise<LmxRes<unknown>>;
 
   getNavigation?: () => Promise<
-    CcoApiResponse<{ override?: { items?: Record<string, unknown>; order?: string[] } }>
+    LmxRes<{ override?: { items?: Record<string, unknown>; order?: string[] } }>
   >;
 
   putNavigation?: (override: {
     items?: Record<string, unknown>;
     order?: string[];
-  }) => Promise<CcoApiResponse<unknown>>;
+  }) => Promise<LmxRes<unknown>>;
+
+  getDashboardOverrides?: () => Promise<
+    LmxRes<{ overrides?: LmxPrefsPatchPayload }>
+  >;
+
+  putDashboardOverrides?: (overrides: LmxPrefsPatchPayload) => Promise<LmxRes<unknown>>;
+
+  getShortcut?: () => Promise<LmxRes<{ config?: LmxChordCfgPayload }>>;
+
+  putShortcut?: (config: LmxChordCfgPayload) => Promise<LmxRes<unknown>>;
+
+  getSecrets?: () => Promise<
+    LmxRes<{
+      secrets?: Array<{ key: string; label: string; configured: boolean; fingerprint?: string }>;
+    }>
+  >;
+
+  putSecrets?: (updates: Record<string, string>) => Promise<LmxRes<unknown>>;
+
+  getEnvRegistry?: () => Promise<LmxRes<{ entries?: LmxEnvRow[] }>>;
+
+  putEnvRegistry?: (entries: LmxEnvRow[]) => Promise<LmxRes<unknown>>;
+
+  getIPAllowlist?: () => Promise<LmxRes<{ allowlist?: string[]; enabled?: boolean }>>;
+
+  putIPAllowlist?: (body: { allowlist: string[]; enabled?: boolean }) => Promise<LmxRes<unknown>>;
+
+  getConnectionSettings?: () => Promise<
+    LmxRes<{ flags?: { maintenance_bypass?: boolean; strict_api_tls?: boolean } }>
+  >;
+
+  putConnectionSettings?: (flags: {
+    maintenance_bypass: boolean;
+    strict_api_tls: boolean;
+  }) => Promise<LmxRes<unknown>>;
+
+  getIntegrationsHealth?: () => Promise<
+    LmxRes<{
+      status?: string;
+      checks?: Array<{ name: string; status: string; message?: string; latency_ms?: number }>;
+      checked_at?: number;
+    }>
+  >;
 };
 
-export type CcoHostEnv = {
+export type LmxBridgeEnv = {
   NEXT_PUBLIC_API_URL?: string;
   NEXT_PUBLIC_API_PREFIX?: string;
   NEXT_PUBLIC_DEMO_MODE?: string;
@@ -74,8 +141,8 @@ export type CcoHostEnv = {
   NODE_ENV?: string;
 };
 
-export type CcoHostAdapter = {
-  api: CcoHostApi;
-  env: CcoHostEnv;
-  getUser: () => CcoUser | null;
+export type LmxBridge = {
+  api: LmxBridgeApi;
+  env: LmxBridgeEnv;
+  getUser: () => LmxActor | null;
 };

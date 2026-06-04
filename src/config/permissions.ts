@@ -1,7 +1,4 @@
-/**
- * Permission keys and labels for RBAC.
- * Must match backend models.Permission* constants.
- */
+
 export const PERMISSION_OPTIONS: { value: string; label: string }[] = [
   { value: 'user_management', label: 'User management' },
   { value: 'driver_management', label: 'Driver management' },

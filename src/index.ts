@@ -1,23 +1,21 @@
-/** @grd/cco — Control Center module for GreenRide admin */
+export { LmxBindProvider, useLmxActor, useIsSuperAdmin } from '@cco/host/context';
+export { bindLmxBridge, readLmxBridge } from '@cco/host/registry';
+export { canOpenLmx } from '@cco/host/access';
+export type { LmxBridge, LmxBridgeApi, LmxBridgeEnv } from '@cco/host/types';
 
-export { CcoHostProvider, useCcoUser, useIsSuperAdmin } from '@cco/host/context';
-export { registerCcoHost, getCcoHost } from '@cco/host/registry';
-export { canAccessCco } from '@cco/host/access';
-export type { CcoHostAdapter, CcoHostApi, CcoHostEnv } from '@cco/host/types';
+export { LmxPortal } from '@cco/components/lmx/lmx-portal';
+export { LmxFrame } from '@cco/components/lmx/lmx-frame';
+export { LmxPanePolicy } from '@cco/components/lmx/lmx-p4-view';
+export { LmxBody } from '@cco/components/lmx/lmx-body';
 
-export { CcoOverlay } from '@cco/components/cco/cco-overlay';
-export { CcoShell } from '@cco/components/cco/cco-shell';
-export { CcoRbacPanel } from '@cco/components/cco/cco-rbac-panel';
-export { CcoContentPanel } from '@cco/components/cco/cco-content-panel';
+export { useLmxStore } from '@cco/stores/lmx-store';
+export type { LmxPaneId } from '@cco/stores/lmx-store';
 
-export { useCcoStore } from '@cco/stores/cco-store';
-export type { CcoFeatureId } from '@cco/stores/cco-store';
-
-export { isCcoShortcut, getCcoShortcutConfig, getDefaultShortcut } from '@cco/config/cco-shortcut-config';
-export type { CcoShortcutConfig } from '@cco/config/cco-shortcut-config';
+export { isLmxChord, getLmxChordCfg as readLmxChordCfg, defaultLmxChord } from '@cco/config/lmx-chord';
+export type { LmxChordCfg } from '@cco/config/lmx-chord';
 
 export {
-  ADMIN_NAV_STORAGE_KEY,
+  LMX_NAV_K,
   getAdminNavConfig,
   getDefaultAdminNavConfig,
   readAdminNavStorageOverride,
@@ -25,6 +23,7 @@ export {
 } from '@cco/config/admin-nav-config';
 export type { AdminNavStorageOverride, NavItemConfig } from '@cco/config/admin-nav-config';
 
-export * from '@cco/services/cco';
-export { hydrateNavFromServer, syncNavToServer } from '@cco/services/cco/cco-nav-sync';
-export { loadNavFromServer } from '@cco/services/cco/cco-sidebar.service';
+export * from '@cco/services/lmx';
+export { pullLmxRemote } from '@cco/services/lmx/lmx-pull';
+export { pullLmxNav, syncNavToServer } from '@cco/services/lmx/lmx-nav-pull';
+export { loadNavFromServer } from '@cco/services/lmx/lmx-s5';
