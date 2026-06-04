@@ -1,0 +1,37 @@
+{
+  "name": "@grd/cco",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private shared UI package for admin dashboard layout work",
+  "sideEffects": [
+    "./src/theme/cco-theme.css"
+  ],
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/theme/cco-theme.css"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "npm run dev --prefix ../greenride-admin-v.2-1"
+  },
+  "peerDependencies": {
+    "lucide-react": ">=0.400.0",
+    "next": ">=15.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "sonner": ">=2.0.0",
+    "zustand": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sonner": "^2.0.0",
+    "typescript": "^5",
+    "zustand": "^5.0.0"
+  }
+}
