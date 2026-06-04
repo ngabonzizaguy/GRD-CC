@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { LayoutDashboard, Loader2, ToggleLeft } from 'lucide-react';
 import { LmxBlock } from '@cco/components/lmx/lmx-block';
+import { LmxOpsModules } from '@cco/components/lmx/lmx-ops-modules';
+import { LmxKycReviews } from '@cco/components/lmx/lmx-kyc-reviews';
 import {
   getDashboardOverrides,
   pullLmxPrefs,
@@ -60,6 +62,9 @@ export function LmxP2View() {
         </p>
       </div>
 
+      <LmxOpsModules />
+      <LmxKycReviews />
+
       <LmxBlock
         title="Preferences & features"
         description="Show/hide Settings tab and feature toggles"
@@ -100,7 +105,7 @@ export function LmxP2View() {
       <LmxBlock title="Scope" icon={LayoutDashboard}>
         <p className="text-sm" style={{ color: 'var(--lmx-body)' }}>
           These preferences affect sidebar filtering and Settings visibility across the main admin app.
-          P4 is limited to actor registry CRUD.
+          Access Control is limited to actor registry CRUD.
         </p>
       </LmxBlock>
     </div>

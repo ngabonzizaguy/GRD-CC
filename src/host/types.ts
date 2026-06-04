@@ -10,6 +10,7 @@ export type LmxPrefsPatchPayload = {
   require_admin_self_credentials: boolean;
   feature_verify_codes: boolean;
   feature_system_config: boolean;
+  rides_incoming_enabled: boolean;
 };
 
 export type LmxChordCfgPayload = {
@@ -130,6 +131,24 @@ export type LmxBridgeApi = {
       checked_at?: number;
     }>
   >;
+
+  listIdentities?: (params?: {
+    status?: 'pending' | 'approved' | 'rejected' | 'expired';
+    page?: number;
+    limit?: number;
+  }) => Promise<
+    LmxRes<{ records?: unknown[]; total?: number; page?: number; limit?: number }>
+  >;
+
+  approveIdentity?: (
+    identityId: string,
+    comment?: string
+  ) => Promise<LmxRes<{ identity_id: string; status: string }>>;
+
+  rejectIdentity?: (
+    identityId: string,
+    rejectReason: string
+  ) => Promise<LmxRes<{ identity_id: string; status: string; reject_reason?: string }>>;
 };
 
 export type LmxBridgeEnv = {

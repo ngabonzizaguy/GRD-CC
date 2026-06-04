@@ -47,7 +47,7 @@ export function LmxPortal({ fontClassName = '' }: { fontClassName?: string }) {
       aria-modal="true"
       aria-label="Lmx module"
       data-theme="lmx-v1"
-      className={`lmx-portal-root fixed inset-0 z-[200] flex flex-col ${fontClassName}`.trim()}
+      className={`lmx-portal-root flex flex-col ${fontClassName}`.trim()}
       style={{ background: 'var(--lmx-canvas)' }}
     >
       <LmxFrame />

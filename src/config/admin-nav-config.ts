@@ -2,6 +2,10 @@
 
 export const LMX_NAV_K = 'gr_lmx_n';
 
+/** Core operations surfaces controlled from CCo (P2). */
+export const CCO_OPS_MODULE_IDS = ['rides', 'drivers', 'vehicles', 'kyc-reviews'] as const;
+export type CcoOpsModuleId = (typeof CCO_OPS_MODULE_IDS)[number];
+
 export type NavItemConfig = {
   id: string;
   label: string;

@@ -141,7 +141,7 @@ export function LmxPanePolicy({ embedded = true }: LmxPanePolicyProps) {
       {!embedded && (
         <div>
           <h1 className="text-2xl font-semibold tracking-tight" style={{ color: 'var(--lmx-ink)' }}>
-            P4 policy
+            Access Control policy
           </h1>
           <p className="mt-1 text-sm" style={{ color: 'var(--lmx-body)' }}>
             Actor roles and permission matrix.

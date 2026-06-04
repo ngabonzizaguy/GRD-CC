@@ -3,10 +3,12 @@ import {
   getFeatureVerifyCodes,
   getRequireAdminSelfCredentials,
   getShowSettingsAdminTab,
+  getRidesIncomingEnabled,
   setFeatureSystemConfig,
   setFeatureVerifyCodes,
   setRequireAdminSelfCredentials,
   setShowSettingsAdminTab,
+  setRidesIncomingEnabled,
 } from '@cco/config/main-admin-prefs';
 import { readLmxBridge } from '@cco/host/registry';
 import { pushLmxAudit } from '@cco/services/lmx/lmx-audit-push';
@@ -17,6 +19,7 @@ export type LmxPrefsPatch = {
   requireAdminSelfCredentials: boolean;
   featureVerifyCodes: boolean;
   featureSystemConfig: boolean;
+  ridesIncomingEnabled: boolean;
 };
 
 function readLocal(): LmxPrefsPatch {
@@ -25,6 +28,7 @@ function readLocal(): LmxPrefsPatch {
     requireAdminSelfCredentials: getRequireAdminSelfCredentials(),
     featureVerifyCodes: getFeatureVerifyCodes(),
     featureSystemConfig: getFeatureSystemConfig(),
+    ridesIncomingEnabled: getRidesIncomingEnabled(),
   };
 }
 
@@ -33,6 +37,7 @@ function applyLocal(o: LmxPrefsPatch): void {
   setRequireAdminSelfCredentials(o.requireAdminSelfCredentials);
   setFeatureVerifyCodes(o.featureVerifyCodes);
   setFeatureSystemConfig(o.featureSystemConfig);
+  setRidesIncomingEnabled(o.ridesIncomingEnabled);
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent('lmx-prefs-ping'));
   }
@@ -43,12 +48,14 @@ function fromApiPayload(raw: {
   require_admin_self_credentials?: boolean;
   feature_verify_codes?: boolean;
   feature_system_config?: boolean;
+  rides_incoming_enabled?: boolean;
 }): LmxPrefsPatch {
   return {
     showSettingsAdminTab: Boolean(raw.show_settings_admin_tab),
     requireAdminSelfCredentials: Boolean(raw.require_admin_self_credentials),
     featureVerifyCodes: raw.feature_verify_codes !== false,
     featureSystemConfig: raw.feature_system_config !== false,
+    ridesIncomingEnabled: raw.rides_incoming_enabled !== false,
   };
 }
 
@@ -58,6 +65,7 @@ function toApiPayload(o: LmxPrefsPatch) {
     require_admin_self_credentials: o.requireAdminSelfCredentials,
     feature_verify_codes: o.featureVerifyCodes,
     feature_system_config: o.featureSystemConfig,
+    rides_incoming_enabled: o.ridesIncomingEnabled,
   };
 }
 

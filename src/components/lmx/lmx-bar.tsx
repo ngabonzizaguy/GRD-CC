@@ -15,11 +15,15 @@ export function LmxBar() {
         type="button"
         className="lmx-icon-btn lmx-focus-ring md:hidden"
         onClick={toggleMobileNav}
-        aria-label="Open navigation menu"
+        aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
         aria-controls="lmx-rail"
         aria-expanded={mobileNavOpen}
       >
-        <Menu className="h-5 w-5" strokeWidth={1.75} />
+        {mobileNavOpen ? (
+          <X className="h-5 w-5" strokeWidth={1.75} />
+        ) : (
+          <Menu className="h-5 w-5" strokeWidth={1.75} />
+        )}
       </button>
       <div className="lmx-breadcrumb min-w-0 flex-1">
         <span className="lmx-product-mark">Lmx</span>

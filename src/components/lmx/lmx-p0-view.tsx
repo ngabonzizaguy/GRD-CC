@@ -101,17 +101,17 @@ export function LmxP0View() {
       </LmxBlock>
 
       <LmxBlock
-        title="P4"
+        title="Access Control"
         description="Actor policy surface"
         icon={KeyRound}
         action={
           <button type="button" className="lmx-btn-primary text-sm" onClick={() => setFeature('p4')}>
-            Open P4
+            Open Access Control
           </button>
         }
       >
         <p className="text-sm" style={{ color: 'var(--lmx-body)' }}>
-          Actor registry and permission matrix. Preference toggles live under P2.
+          Actor registry and permission matrix. Preference toggles live under Operations.
         </p>
       </LmxBlock>
     </div>

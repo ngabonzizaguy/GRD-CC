@@ -99,8 +99,9 @@ export function LmxP5View() {
           Sidebar menu
         </h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--lmx-body)' }}>
-          Edit labels and paths, reorder, and show/hide main admin nav items. Changes apply to the
-          live sidebar immediately (local until backend menu API).
+          Edit labels and paths, reorder, and show/hide main admin nav items. Rides, Drivers,
+          Vehicles, and KYC have a focused editor under Operations. Changes apply to the live sidebar
+          immediately (local until backend menu API).
         </p>
       </div>
 

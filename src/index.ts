@@ -20,8 +20,17 @@ export {
   getDefaultAdminNavConfig,
   readAdminNavStorageOverride,
   saveAdminNavConfigToStorage,
+  CCO_OPS_MODULE_IDS,
 } from '@cco/config/admin-nav-config';
-export type { AdminNavStorageOverride, NavItemConfig } from '@cco/config/admin-nav-config';
+export type { AdminNavStorageOverride, NavItemConfig, CcoOpsModuleId } from '@cco/config/admin-nav-config';
+
+export {
+  getShowSettingsAdminTab,
+  getRequireAdminSelfCredentials,
+  getFeatureVerifyCodes,
+  getFeatureSystemConfig,
+  getRidesIncomingEnabled,
+} from '@cco/config/main-admin-prefs';
 
 export * from '@cco/services/lmx';
 export { pullLmxRemote } from '@cco/services/lmx/lmx-pull';

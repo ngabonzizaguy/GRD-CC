@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+:root {
+  --cco-login-bg: #fafafa;
+  --cco-login-ink: #171717;
+  --cco-login-mute: #888888;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--cco-login-bg);
+  color: var(--cco-login-ink);
+}

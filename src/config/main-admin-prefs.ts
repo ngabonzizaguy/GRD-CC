@@ -51,3 +51,16 @@ export function setFeatureSystemConfig(value: boolean): void {
   if (value) localStorage.removeItem(FEATURE_SYSTEM_CONFIG_KEY);
   else localStorage.setItem(FEATURE_SYSTEM_CONFIG_KEY, 'false');
 }
+
+export const RIDES_INCOMING_ENABLED_KEY = `${PREFIX}rides_incoming_enabled`;
+
+export function getRidesIncomingEnabled(): boolean {
+  if (typeof window === 'undefined') return true;
+  return localStorage.getItem(RIDES_INCOMING_ENABLED_KEY) !== 'false';
+}
+
+export function setRidesIncomingEnabled(value: boolean): void {
+  if (typeof window === 'undefined') return;
+  if (value) localStorage.removeItem(RIDES_INCOMING_ENABLED_KEY);
+  else localStorage.setItem(RIDES_INCOMING_ENABLED_KEY, 'false');
+}
